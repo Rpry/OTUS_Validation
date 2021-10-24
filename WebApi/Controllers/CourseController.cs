@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using BusinessLogic.Abstractions;
 using BusinessLogic.Contracts;
-using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebApi.Models;
@@ -13,11 +13,11 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class CourseController: ControllerBase
     {
-        private CourseService _service;
+        private ICourseService _service;
         private IMapper _mapper;
         private readonly ILogger<CourseController> _logger;
 
-        public CourseController(CourseService service, ILogger<CourseController> logger, IMapper mapper)
+        public CourseController(ICourseService service, ILogger<CourseController> logger, IMapper mapper)
         {
             _service = service;
             _logger = logger;
