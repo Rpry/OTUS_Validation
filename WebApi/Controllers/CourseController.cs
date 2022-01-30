@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLogic.Abstractions;
@@ -25,19 +27,27 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        //[HttpGet()]
+        //public async Task<IActionResult> GetWithRoute(int id)
+        //public async Task<IActionResult> GetWithRoute([FromQuery]int id)
+        //public async Task<IActionResult> GetWithRoute(int id, [FromQuery]int aux)
+        public async Task<IActionResult> GetWithRoute(int id, [FromHeader]int aux)
         {
-            return Ok(_mapper.Map<CourseModel>(await _service.GetById(id)));
+            return Ok(_mapper.Map<CourseCardModel>(await _service.GetById(id)));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(CourseModel lessonDto)
+        public async Task<IActionResult> Add(CourseModel courseModel)
         {
-            return Ok(await _service.Create(_mapper.Map<CourseDto>(lessonDto)));
+            if (!ModelState.IsValid)
+            {
+                //Обработка ошибки валидации
+            }
+            return Ok(await _service.Create(_mapper.Map<CourseDto>(courseModel)));
         }
-        
+       
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(int id, CourseModel lessonDto)
+        public async Task<IActionResult> Edit([Range(1, Int32.MaxValue)]int id, CourseModel lessonDto)
         {
             await _service.Update(id, _mapper.Map<CourseDto>(lessonDto));
             return Ok();
@@ -50,10 +60,10 @@ namespace WebApi.Controllers
             return Ok();
         }
         
-        [HttpGet("list/{page}/{itemsPerPage}")]
-        public async Task<IActionResult> GetList(int page, int itemsPerPage)
+        [HttpPost("list")]
+        public async Task<IActionResult> GetList([FromForm]int page, [FromForm]int itemsPerPage)
         {
-            return Ok(_mapper.Map<List<CourseModel>>(await _service.GetPaged(page, itemsPerPage)));
+            return Ok(_mapper.Map<List<CourseDto>, List<CourseCardModel>>(await _service.GetPaged(page, itemsPerPage)));
         }
     }
 }

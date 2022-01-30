@@ -53,7 +53,9 @@ namespace DataAccess.EntityFramework.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Subject")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.HasKey("Id");
 

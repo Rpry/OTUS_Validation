@@ -29,6 +29,10 @@ namespace DataAccess.EntityFramework
                 .HasMany(u => u.Lessons)
                 .WithOne(c=> c.Course)
                 .IsRequired();
+
+            modelBuilder.Entity<Lesson>().Property(l=> l.Subject)
+                .IsRequired()
+                .HasMaxLength(20);
         }
     }
 }

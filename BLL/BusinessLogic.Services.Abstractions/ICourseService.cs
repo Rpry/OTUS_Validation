@@ -15,7 +15,7 @@ namespace BusinessLogic.Abstractions
         /// <param name="page">номер страницы</param>
         /// <param name="pageSize">объем страницы</param>
         /// <returns></returns>
-        Task<ICollection<CourseDto>> GetPaged(int page, int pageSize);
+        Task<List<CourseDto>> GetPaged(int page, int pageSize);
 
         /// <summary>
         /// Получить

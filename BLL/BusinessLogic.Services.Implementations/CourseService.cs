@@ -30,10 +30,10 @@ namespace BusinessLogic.Services
         /// <param name="page">номер страницы</param>
         /// <param name="pageSize">объем страницы</param>
         /// <returns></returns>
-        public async Task<ICollection<CourseDto>> GetPaged(int page, int pageSize)
+        public async Task<List<CourseDto>> GetPaged(int page, int pageSize)
         {
-            ICollection<Course> entities = await _courseRepository.GetPagedAsync(page, pageSize);
-            return _mapper.Map<ICollection<Course>, ICollection<CourseDto>>(entities);
+            var entities = await _courseRepository.GetPagedAsync(page, pageSize);
+            return _mapper.Map<List<Course>, List<CourseDto>>(entities);
         }
 
         /// <summary>

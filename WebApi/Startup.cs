@@ -1,11 +1,16 @@
+using System.Collections.Generic;
+using System.Globalization;
 using AutoMapper;
 using ComponentRegistrar;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApi.Mapping;
+using WebApi.Validators;
 
 namespace WebApi
 {
@@ -23,8 +28,22 @@ namespace WebApi
         {
             InstallAutomapper(services);
             services.AddServices(Configuration);
-            services.AddControllers();
+            services.AddControllers()
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    //options.SuppressModelStateInvalidFilter = true;
+                })
 
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                        factory.Create(typeof(Controllers_CourseController));
+                });
+            
+            services.AddFluentValidation(fv =>
+            {
+                fv.RegisterValidatorsFromAssemblyContaining<LessonValidator>();
+            });
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
         }
@@ -38,11 +57,11 @@ namespace WebApi
             }
 
             app.UseHttpsRedirection();
-
+            // HERE
+            app.UseRequestLocalization(GetLocalizationOptions());
             app.UseRouting();
 
             app.UseAuthorization();
-
             if (!env.IsProduction())
             {
                 // Enable middleware to serve generated Swagger as a JSON endpoint.
@@ -57,6 +76,7 @@ namespace WebApi
                     c.RoutePrefix = string.Empty;
                 });
             }
+            app.UseMiddleware(typeof(Middleware.ErrorHandlingMiddleware));
             
             app.UseEndpoints(endpoints =>
             {
@@ -81,6 +101,22 @@ namespace WebApi
             });
             configuration.AssertConfigurationIsValid();
             return configuration;
+        }
+        
+        private RequestLocalizationOptions GetLocalizationOptions()
+        {
+            var supportedCultures = new List<CultureInfo>
+            {
+                new CultureInfo("ru-RU"),
+                new CultureInfo("en-GB")
+            };
+            var options = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("ru-RU"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            };
+            return options;
         }
     }
 }
