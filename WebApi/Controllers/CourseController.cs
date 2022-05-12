@@ -47,9 +47,9 @@ namespace WebApi.Controllers
         }
        
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit([Range(1, Int32.MaxValue)]int id, CourseModel lessonDto)
+        public async Task<IActionResult> Edit([Range(1, Int32.MaxValue)]int id, CourseModel model)
         {
-            await _service.Update(id, _mapper.Map<CourseDto>(lessonDto));
+            await _service.Update(id, _mapper.Map<CourseDto>(model));
             return Ok();
         }
         

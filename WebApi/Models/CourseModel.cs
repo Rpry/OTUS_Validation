@@ -8,16 +8,15 @@ namespace WebApi.Models
     /// ДТО курса
     /// </summary>
     //[CourseValidation]
-    public class CourseModel : IValidatableObject
+    public class CourseModel // : IValidatableObject
     {
         /// <summary>
         /// Название
         /// </summary>
-        //[Required]
+        [Required]
         [MaxLength(20)]
-        [ExcludeSymbolsAttribute(new []{' '})]
-        //[Required]
-        [Required(ErrorMessageResourceType = typeof(Controllers_CourseController), ErrorMessageResourceName = "CourseModel_Name_ErrorMNessage")]
+        //[ExcludeSymbolsAttribute(new []{' '})]
+        //[Required(ErrorMessageResourceType = typeof(Controllers_CourseController), ErrorMessageResourceName = "CourseModel_Name_ErrorMNessage")]
         public string Name { get; set; }
         
         /// <summary>
@@ -37,5 +36,4 @@ namespace WebApi.Models
             return results;
         }
     }
-    
 }
