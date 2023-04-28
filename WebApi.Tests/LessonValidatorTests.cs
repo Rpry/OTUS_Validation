@@ -1,4 +1,3 @@
-using System;
 using FluentAssertions;
 using WebApi.Models;
 using WebApi.Validators;
@@ -18,14 +17,14 @@ namespace WebApi.Tests
         public void Validate_Should_Return_Success_For_Correct_Data()
         {
             //Arrange
-            var address = new LessonModel
+            var model = new LessonModel
             {
                 Subject = "subject",
                 CourseId = 1
             };
             
             //Act
-            var result = _validator.Validate(address);
+            var result = _validator.Validate(model);
             
             //Assert
             result.IsValid.Should().BeTrue();

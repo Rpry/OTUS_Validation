@@ -28,10 +28,10 @@ namespace WebApi.Controllers
 
         [HttpGet("{id}")]
         //[HttpGet()]
-        //public async Task<IActionResult> GetWithRoute(int id)
+        public async Task<IActionResult> GetWithRoute([FromRoute]int id)
         //public async Task<IActionResult> GetWithRoute([FromQuery]int id)
         //public async Task<IActionResult> GetWithRoute(int id, [FromQuery]int aux)
-        public async Task<IActionResult> GetWithRoute(int id, [FromHeader]int aux)
+        //public async Task<IActionResult> Get(int id, [FromHeader]int aux)
         {
             return Ok(_mapper.Map<CourseCardModel>(await _service.GetById(id)));
         }

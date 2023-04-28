@@ -8,7 +8,7 @@ namespace WebApi.Models
     /// ДТО курса
     /// </summary>
     //[CourseValidation]
-    public class CourseModel // : IValidatableObject
+    public class CourseModel//: IValidatableObject
     {
         /// <summary>
         /// Название
@@ -23,7 +23,7 @@ namespace WebApi.Models
         /// Стоимость
         /// </summary>
         [Range(1, 10)]
-        [GreaterThanDecimal(2)]
+        //[GreaterThanDecimal(2)]
         public decimal Price { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
