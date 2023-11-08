@@ -30,7 +30,7 @@ namespace BusinessLogic.Services
         /// <param name="page">номер страницы</param>
         /// <param name="pageSize">объем страницы</param>
         /// <returns></returns>
-        public async Task<List<CourseDto>> GetPaged(int page, int pageSize)
+        public async Task<List<CourseDto>> GetPagedAsync(int page, int pageSize)
         {
             var entities = await _courseRepository.GetPagedAsync(page, pageSize);
             return _mapper.Map<List<Course>, List<CourseDto>>(entities);
@@ -41,7 +41,7 @@ namespace BusinessLogic.Services
         /// </summary>
         /// <param name="id">идентификатор</param>
         /// <returns>ДТО курса</returns>
-        public async Task<CourseDto> GetById(int id)
+        public async Task<CourseDto> GetByIdAsync(int id)
         {
             var course = await _courseRepository.GetAsync(id);
             return _mapper.Map<CourseDto>(course);
@@ -52,7 +52,7 @@ namespace BusinessLogic.Services
         /// </summary>
         /// <param name="courseDto">ДТО курса</param>
         /// <returns>идентификатор</returns>
-        public async Task<int> Create(CourseDto courseDto)
+        public async Task<int> CreateAsync(CourseDto courseDto)
         {
             var entity = _mapper.Map<CourseDto, Course>(courseDto);
             var res = await _courseRepository.AddAsync(entity);
@@ -77,7 +77,7 @@ namespace BusinessLogic.Services
         /// Удалить
         /// </summary>
         /// <param name="id">идентификатор</param>
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var course = await _courseRepository.GetAsync(id);
             course.Deleted = true; 

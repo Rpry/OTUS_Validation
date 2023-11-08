@@ -28,22 +28,22 @@ namespace WebApi.Controllers
 
         [HttpGet("{id}")]
         //[HttpGet()]
-        public async Task<IActionResult> GetWithRoute([FromRoute]int id)
+        //public async Task<IActionResult> GetWithRoute(int id)
         //public async Task<IActionResult> GetWithRoute([FromQuery]int id)
         //public async Task<IActionResult> GetWithRoute(int id, [FromQuery]int aux)
-        //public async Task<IActionResult> Get(int id, [FromHeader]int aux)
+        public async Task<IActionResult> GetAsync(int id, [FromHeader]int aux)
         {
-            return Ok(_mapper.Map<CourseCardModel>(await _service.GetById(id)));
+            return Ok(_mapper.Map<CourseCardModel>(await _service.GetByIdAsync(id)));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(CourseModel courseModel)
+        public async Task<IActionResult> AddAsync([FromForm]CourseModel courseModel)
         {
             if (!ModelState.IsValid)
             {
                 //Обработка ошибки валидации
             }
-            return Ok(await _service.Create(_mapper.Map<CourseDto>(courseModel)));
+            return Ok(await _service.CreateAsync(_mapper.Map<CourseDto>(courseModel)));
         }
        
         [HttpPut("{id}")]
@@ -54,16 +54,16 @@ namespace WebApi.Controllers
         }
         
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
-            await _service.Delete(id);
+            await _service.DeleteAsync(id);
             return Ok();
         }
         
         [HttpPost("list")]
-        public async Task<IActionResult> GetList([FromForm]int page, [FromForm]int itemsPerPage)
+        public async Task<IActionResult> GetListAsync([FromForm]int page, [FromForm]int itemsPerPage)
         {
-            return Ok(_mapper.Map<List<CourseDto>, List<CourseCardModel>>(await _service.GetPaged(page, itemsPerPage)));
+            return Ok(_mapper.Map<List<CourseDto>, List<CourseCardModel>>(await _service.GetPagedAsync(page, itemsPerPage)));
         }
     }
 }

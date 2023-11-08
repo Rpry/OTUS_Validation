@@ -30,7 +30,7 @@ namespace BusinessLogic.Services
         /// <param name="page">номер страницы</param>
         /// <param name="pageSize">объем страницы</param>
         /// <returns></returns>
-        public async Task<ICollection<LessonDto>> GetPaged(int page, int pageSize)
+        public async Task<ICollection<LessonDto>> GetPagedAsync(int page, int pageSize)
         {
             ICollection<Lesson> entities = await _lessonRepository.GetPagedAsync(page, pageSize);
             return _mapper.Map<ICollection<Lesson>, ICollection<LessonDto>>(entities);
@@ -41,7 +41,7 @@ namespace BusinessLogic.Services
         /// </summary>
         /// <param name="id">идентификатор</param>
         /// <returns>ДТО урока</returns>
-        public async Task<LessonDto> GetById(int id)
+        public async Task<LessonDto> GetByIdAsync(int id)
         {
             var lesson = await _lessonRepository.GetAsync(id);
             return _mapper.Map<LessonDto>(lesson);
@@ -52,7 +52,7 @@ namespace BusinessLogic.Services
         /// </summary>
         /// <param name="lessonDto">ДТО урока</param>
         /// <returns>идентификатор</returns>
-        public async Task<int> Create(LessonDto lessonDto)
+        public async Task<int> CreateAsync(LessonDto lessonDto)
         {
             var entity = _mapper.Map<LessonDto, Lesson>(lessonDto);
             entity.CourseId = lessonDto.CourseId;
@@ -66,7 +66,7 @@ namespace BusinessLogic.Services
         /// </summary>
         /// <param name="id">идентификатор</param>
         /// <param name="lessonDto">ДТО урока</param>
-        public async Task Update(int id, LessonDto lessonDto)
+        public async Task UpdateAsync(int id, LessonDto lessonDto)
         {
             var entity = _mapper.Map<LessonDto, Lesson>(lessonDto);
             entity.Id = id;
@@ -78,7 +78,7 @@ namespace BusinessLogic.Services
         /// Удалить
         /// </summary>
         /// <param name="id">идентификатор</param>
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var lesson = await _lessonRepository.GetAsync(id);
             lesson.Deleted = true; 

@@ -19,7 +19,8 @@ namespace WebApi.ValidationAttributes
             {
                 throw new NotSupportedException();
             }
-            if (course.Name == Constants.DotNetCourseName && course.Price > Constants.DotNetCourseMaxPrice)
+            if (course.Name == Constants.DotNetCourseName 
+                && course.Price > Constants.DotNetCourseMaxPrice)
             {
                 return false;
             }
