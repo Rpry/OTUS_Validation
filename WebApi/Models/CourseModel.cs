@@ -8,22 +8,22 @@ namespace WebApi.Models
     /// ДТО курса
     /// </summary>
     //[CourseValidation]
-    public class CourseModel: IValidatableObject
+    public class CourseModel : IValidatableObject
     {
         /// <summary>
         /// Название
         /// </summary>
-        //[Required]
-        //[MaxLength(20)]
+        [Required]
+        [MaxLength(20)]
         //[ExcludeSymbols(new []{'a','b'})]
-        [Required(ErrorMessageResourceType = typeof(Controllers_CourseController), ErrorMessageResourceName = "CourseModel_Name_ErrorMNessage")]
+        //[Required(ErrorMessageResourceType = typeof(Controllers_CourseController), ErrorMessageResourceName = "CourseModel_Name_ErrorMNessage")]
         public string Name { get; set; }
         
         /// <summary>
         /// Стоимость
         /// </summary>
-        //[Range(1, 10)]
-        [GreaterThanDecimal(2)]
+        [Range(1, 10)]
+        //[GreaterThanDecimal(2)]
         public decimal Price { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

@@ -14,7 +14,7 @@ namespace WebApi.ValidationAttributes
                 if (guid != Guid.Empty)
                 {
                     result = true;
-                }    
+                }
             }
             return result;
         }

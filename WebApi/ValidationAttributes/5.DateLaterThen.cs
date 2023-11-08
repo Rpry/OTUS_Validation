@@ -7,7 +7,6 @@ namespace WebApi.ValidationAttributes
     /// <summary>
     /// Валидатор, проверяющий что текущая дата позже (больше) чем та которая передана в аргументе
     /// </summary>
-    /// <param name="otherProperty">меньшая дата, с которой сравнивается текущая</param>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter)]
     public sealed class DateLaterThen : CompareAttribute
     {

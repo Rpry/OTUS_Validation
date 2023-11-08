@@ -36,14 +36,14 @@ namespace WebApi.Tests
         public void Validate_Should_Return_Error_If_Subject_Is_Null_Or_Empty(string subject)
         {
             //Arrange
-            var address = new LessonModel
+            var model = new LessonModel
             {
                 Subject = subject,
                 CourseId = 1
             };
             
             //Act
-            var result = _validator.Validate(address);
+            var result = _validator.Validate(model);
             
             //Assert
             result.IsValid.Should().BeFalse();
@@ -53,13 +53,13 @@ namespace WebApi.Tests
         public void Validate_Should_Return_Error_If_CourseId_Is_Zero()
         {
             //Arrange
-            var address = new LessonModel
+            var model = new LessonModel
             {
                 Subject = "subject"
             };
             
             //Act
-            var result = _validator.Validate(address);
+            var result = _validator.Validate(model);
             
             //Assert
             result.IsValid.Should().BeFalse();
