@@ -8,7 +8,7 @@ namespace WebApi.Models
     /// ДТО курса
     /// </summary>
     //[CourseValidation]
-    public class CourseModel : IValidatableObject
+    public class CourseModel// : IValidatableObject
     {
         /// <summary>
         /// Название

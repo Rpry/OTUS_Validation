@@ -37,6 +37,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
+        //public async Task<IActionResult> AddAsync([FromBody]CourseModel courseModel)
         public async Task<IActionResult> AddAsync([FromForm]CourseModel courseModel)
         {
             if (!ModelState.IsValid)
@@ -47,7 +48,8 @@ namespace WebApi.Controllers
         }
        
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditAsync([Range(1, Int32.MaxValue)]int id, CourseModel model)
+        //public async Task<IActionResult> EditAsync([Range(1, Int32.MaxValue)]int id, CourseModel model)
+        public async Task<IActionResult> EditAsync(int id, CourseModel model)
         {
             await _service.Update(id, _mapper.Map<CourseDto>(model));
             return Ok();
