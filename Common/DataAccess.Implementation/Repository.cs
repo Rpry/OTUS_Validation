@@ -12,7 +12,9 @@ namespace DataAccess.Implementation
     /// </summary>
     /// <typeparam name="T">Тип сущности</typeparam>
     /// <typeparam name="TPrimaryKey">Основной ключ</typeparam>
-    public abstract class Repository<T, TPrimaryKey> : ReadRepository<T, TPrimaryKey>, IRepository<T, TPrimaryKey> where T : class, IEntity<TPrimaryKey>
+    public abstract class Repository<T, TPrimaryKey> : ReadRepository<T, TPrimaryKey>, IRepository<T, TPrimaryKey>
+        where TPrimaryKey : struct
+        where T : class, IEntity<TPrimaryKey>
     {
         protected Repository(DbContext context): base(context)
         {

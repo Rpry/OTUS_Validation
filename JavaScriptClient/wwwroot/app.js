@@ -6,7 +6,8 @@ function api() {
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     debugger;
-    formData.append("file", fileInput.files[0]);
-    xhr.open("POST", url, true);
+    formData.append("file1", fileInput.files[0]);
+    xhr.open("POST", url, false);
     xhr.send(formData);
+    //return false;
 }

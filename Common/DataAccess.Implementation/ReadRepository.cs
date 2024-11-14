@@ -12,7 +12,9 @@ namespace DataAccess.Implementation
     /// </summary>
     /// <typeparam name="T">Тип сущности</typeparam>
     /// <typeparam name="TPrimaryKey">Основной ключ</typeparam>
-    public abstract class ReadRepository<T, TPrimaryKey> : IReadRepository<T, TPrimaryKey> where T : class, IEntity<TPrimaryKey>
+    public abstract class ReadRepository<T, TPrimaryKey> : IReadRepository<T, TPrimaryKey>
+        where TPrimaryKey : struct
+        where T : class, IEntity<TPrimaryKey>
     {
         protected readonly DbContext Context;
         protected DbSet<T> EntitySet;

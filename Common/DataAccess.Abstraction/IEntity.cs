@@ -4,7 +4,7 @@ namespace DataAccess.Abstraction
     /// Интерфейс сущности с идентификатором
     /// </summary>
     /// <typeparam name="TId">Тип идентификатора</typeparam>
-    public interface IEntity<TId>
+    public interface IEntity<TId> where TId : struct
     {
         /// <summary>
         /// Идентификатор

@@ -10,7 +10,9 @@ namespace DataAccess.Abstraction
     /// </summary>
     /// <typeparam name="T">Тип Entity для репозитория</typeparam>
     /// <typeparam name="TPrimaryKey">тип первичного ключа</typeparam>
-    public interface IReadRepository<T, TPrimaryKey> : IRepository where T : IEntity<TPrimaryKey>
+    public interface IReadRepository<T, TPrimaryKey> : IRepository 
+        where TPrimaryKey : struct
+        where T : IEntity<TPrimaryKey>
     {
         /// <summary>
         /// Запросить все сущности в базе

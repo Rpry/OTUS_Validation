@@ -46,11 +46,20 @@ namespace WebApi
             });
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
+            
+            // Add Cors
+            services.AddCors(o => o.AddPolicy("Cors", builder =>
+            {
+                builder.WithOrigins("https://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("Cors");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
