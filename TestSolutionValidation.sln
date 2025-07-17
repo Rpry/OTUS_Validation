@@ -32,8 +32,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentRegistrar", "Compo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Tests", "WebApi.Tests\WebApi.Tests.csproj", "{B4399C26-39C5-48DC-837A-16BE7805210D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JavaScriptClient", "JavaScriptClient\JavaScriptClient.csproj", "{C44ACBB1-FD1A-4D0D-B502-54D76FD43456}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,10 +86,6 @@ Global
 		{B4399C26-39C5-48DC-837A-16BE7805210D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4399C26-39C5-48DC-837A-16BE7805210D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4399C26-39C5-48DC-837A-16BE7805210D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C44ACBB1-FD1A-4D0D-B502-54D76FD43456}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C44ACBB1-FD1A-4D0D-B502-54D76FD43456}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C44ACBB1-FD1A-4D0D-B502-54D76FD43456}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C44ACBB1-FD1A-4D0D-B502-54D76FD43456}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B59C2C29-0151-41C5-980C-C6274C3BE79F} = {B6AF590D-9EB5-4FA9-9FAC-14562F9C4DA7}

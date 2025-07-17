@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using WebApi.Mapping;
 using WebApi.Validators;
 
@@ -95,11 +96,16 @@ namespace WebApi
         
         private static IServiceCollection InstallAutomapper(IServiceCollection services)
         {
-            services.AddSingleton<IMapper>(new Mapper(GetMapperConfiguration()));
+            services.AddSingleton<IMapper>(provider =>
+            {
+                var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+                return new Mapper(GetMapperConfiguration(loggerFactory));
+            });
+
             return services;
         }
         
-        private static MapperConfiguration GetMapperConfiguration()
+        private static MapperConfiguration GetMapperConfiguration(ILoggerFactory loggerFactory)
         {
             var configuration = new MapperConfiguration(cfg =>
             {
@@ -107,7 +113,7 @@ namespace WebApi
                 cfg.AddProfile<LessonMappingsProfile>();
                 cfg.AddProfile<BusinessLogic.Services.Mapping.CourseMappingsProfile>();
                 cfg.AddProfile<BusinessLogic.Services.Mapping.LessonMappingsProfile>();
-            });
+            }, loggerFactory);
             configuration.AssertConfigurationIsValid();
             return configuration;
         }
